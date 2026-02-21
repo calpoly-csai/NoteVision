@@ -26,14 +26,15 @@ async def read_item(item_id: int, q: str | None = None):
     return {"item_id": item_id, "q": q}
 
 @app.put("/analyze/")
-async def analyze(file: UploadFile | None = None):
-    result = await AI_call(file) #TODO: setup AI call
+async def analyze(upload_file: UploadFile | None = None):
+    if not upload_file:
+            return{"Error": "No upload file sent"}
+    
+    result = await AI_call(upload_file.file) #TODO: setup AI call
 
-    if not file:
-            return{"message": "No upload file sent"}
     #mocked response for now
     return AnalyzeSchema(
-        title= file.filename,
+        title= upload_file.filename,
         summary= "Mock summary",
         key_points= ["Mock key point1", "Mock key point2"],
         details= Details(
