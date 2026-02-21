@@ -1,29 +1,34 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, File, UploadFile
 from pydantic import BaseModel #BaseModel used to set JSON Schema
 
 class Details(BaseModel):
-    equations: list[str] | None = None
-    diagrams: str | None = None
-    tables: str | None = None
+    equations: list[str] 
+    diagrams: str 
+    tables: str 
 
 class AnalyzeSchema(BaseModel):
     title: str
     summary: str
-    key_points: list[str]
-    details: Details
+    key_points: list[str] 
+    details: Details 
 
 app = FastAPI()
 
+async def AI_call(file: File()):
+    pass #TODO
+
 @app.get("/")
-def read_root():
+async def read_root():
     return {"Hello": "World"}
 
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
+async def read_item(item_id: int, q: str | None = None):
     return {"item_id": item_id, "q": q}
 
 @app.put("/analyze/")
-def analyze():
+async def analyze(file: bytes = File()):
+    result = await AI_call(file) #TODO: setup AI call
+    #mocked response for now
     return AnalyzeSchema(
         title= "Mock title",
         summary= "Mock summary",
@@ -36,5 +41,5 @@ def analyze():
     )
 
 @app.get("/health")
-def health_check(response: Response):
+async def health_check(response: Response):
     return {"status": f"Ok"}

@@ -1,6 +1,5 @@
-# NoteVision
+# NoteVision - backend
 
-### backend
 **steps to get backend server working**
 
 In backend:
@@ -20,4 +19,9 @@ pip install "fastapi[standard]"
 **command to run server:** 
 ```
 fastapi dev main.py
+```
+
+**if file upload doesn't work, make sure multipart is istalled**
+```
+pip install python-multipart
 ```
