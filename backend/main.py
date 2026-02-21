@@ -2,9 +2,9 @@ from fastapi import FastAPI, Response
 from pydantic import BaseModel #BaseModel used to set JSON Schema
 
 class Details(BaseModel):
-    equations: list[str]
-    diagrams: str
-    tables: str
+    equations: list[str] | None = None
+    diagrams: str | None = None
+    tables: str | None = None
 
 class AnalyzeSchema(BaseModel):
     title: str
@@ -28,7 +28,11 @@ def analyze():
         title= "Mock title",
         summary= "Mock summary",
         key_points= ["Mock key point1", "Mock key point2"],
-        details= Details()
+        details= Details(
+            equations= ["y=mx+b"],
+            diagrams= "Mock diagram",
+            tables= "Mock table"
+        )
     )
 
 @app.get("/health")
