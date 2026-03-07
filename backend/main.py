@@ -14,7 +14,7 @@ class AnalyzeSchema(BaseModel):
 
 app = FastAPI()
 
-async def AI_call(file: File()):
+async def AI_call(file: File):
     pass #TODO
 
 @app.get("/")
