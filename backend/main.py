@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Response, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel #BaseModel used to set JSON Schema
 
 class Details(BaseModel):
@@ -13,6 +14,14 @@ class AnalyzeSchema(BaseModel):
     details: Details 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["localhost", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 async def AI_call(file: File):
     pass #TODO
