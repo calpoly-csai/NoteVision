@@ -25,3 +25,6 @@ fastapi dev main.py
 ```
 pip install python-multipart
 ```
+
+**make sure to read the requirements.txt for extra packages that need downloading**
+**for gemini api, use the GEMINI_API_KEY macro in .env file and should work fine**

@@ -1,8 +1,8 @@
 import React, {useState } from "react";
 
-function Upload() {
+function Upload(props) {
   const [file, setFile] = useState(null);
-  const [response, setResponse] = useState(null);
+  // const [response, setResponse] = useState(null);
 
   const handleFileChange = (e) => {setFile(e.target.files[0]);};
 
@@ -22,8 +22,7 @@ function Upload() {
       
       });
       const data = await res.json();
-      setResponse(data);
-    
+      props.setResponse(data);
     
     } catch (error){
       console.error("Upload failed: ", error);
@@ -36,7 +35,6 @@ function Upload() {
       <button style={{ marginLeft: "10px" }} onClick={handleUpload}>
         Upload
       </button>
-      {response && <pre>{JSON.stringify(response, null, 2)}</pre>}
     </div>
   );
 }
