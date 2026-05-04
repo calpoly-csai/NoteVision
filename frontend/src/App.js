@@ -1,19 +1,20 @@
-import React, {useState } from "react";
-import Upload from "./Upload";
-import Output from "./Output";
-// import mockData from "./mockdata.json";
-
+import React, { useState } from "react";
+import Hero from "./components/Hero";
+import UploadPanel from "./components/UploadPanel";
+import OutputPanel from "./components/OutputPanel";
+import "./App.css";
 
 function App() {
-const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>NoteVision Upload</h1>
-      <Upload 
-      response={response}
-      setResponse={setResponse} />
-      <Output data={response} />
+    <div className="app-shell">
+      <Hero />
+      <main className="main-grid">
+        <UploadPanel setResponse={setResponse} setLoading={setLoading} loading={loading}/>
+        <OutputPanel data={response} loading={loading} />
+      </main>
     </div>
   );
 }
